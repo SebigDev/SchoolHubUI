@@ -1,0 +1,94 @@
+
+<div class="search_field">
+  <button mat-raised-button color="accent" (click)="onCreateStaff()">
+    <mat-icon matTooltip="Add New Staff">add</mat-icon>
+    <mat-icon>assignment_ind</mat-icon>
+  </button>
+  <mat-form-field class="search_form-field" color="accent" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search Staff" autocomplete="off" (keyup)="applyFilter()" />
+  </mat-form-field>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="mat-elevation-z8 tableUser">
+  <mat-table #table [dataSource]="allStaffs" matSort aria-label="Class">
+
+
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let staff">{{staff.firstname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="middlename">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Middle Name</mat-header-cell>
+      <mat-cell *matCellDef="let staff">{{staff.middlename}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let staff">{{staff.lastname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+      <mat-cell *matCellDef="let staff">{{staff.gender}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateEmployed">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date Employed</mat-header-cell>
+      <mat-cell *matCellDef="let staff">{{staff.dateEmployed | date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isActive">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let staff">{{staff.isActive}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let staff">
+        <button mat-icon-button (click)="onAssignClass(staff)"
+                matTooltip="Assign Class to Staff"
+                style="color:green"
+                matTooltipClass="addTip">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onViewStaff(staff)"
+                matTooltip="View and Edit Staff"
+                matTooltipClass="addTip"
+                class="tip">
+          <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-icon-button
+                matTooltip="Delete Staff"
+                matTooltipClass="addTip">
+          <mat-icon color="warn">delete_outline</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="nodata">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No Available Data
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let staff; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':allStaffs?.data != null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(allStaffs?.data == null && allStaffs?.data?.length == 0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator #paginator
+                 [length]="allStaffs?.data?.length"
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[25, 50, 100, 250]"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

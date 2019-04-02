@@ -1,0 +1,101 @@
+
+<div class="search_field">
+  <button mat-raised-button color="accent" (click)="onCreateStudent()">
+    <mat-icon matTooltip="Add New Student">add</mat-icon>
+    <mat-icon>assignment_ind</mat-icon>
+  </button>
+  <mat-form-field class="search_form-field" color="accent" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search Student" autocomplete="off" (keyup)="applyFilter()" />
+  </mat-form-field>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="search_field">
+  <mat-tab-group color="accent"  (selectedTabChange)="indexCheck($event)">
+    <mat-tab *ngFor="let mClass of allClasses; let index=index"
+             [label]="mClass.classCode">
+      <div class="mat-elevation-z8 tableUser">
+        <mat-table #table [dataSource]="allStudents" matSort aria-label="Class">
+
+
+          <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.firstname}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="middlename">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Middle Name</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.middlename}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.lastname}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Age</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.age}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.gender}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateOfRegistration">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Enrolled On</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.dateOfRegistration | date}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="isActive">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let student">{{student.isActive}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let student">
+              <button mat-icon-button (click)="viewStudentDetail(student.id)"
+                      matTooltip="View Student"
+                      matTooltipClass="addTip"
+                      class="tip">
+                <mat-icon>launch</mat-icon>
+              </button>
+              <button mat-icon-button
+                      matTooltip="Delete Student"
+                      matTooltipClass="addTip">
+                <mat-icon color="warn">delete_outline</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+              <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+            </mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="nodata">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+              No Available Data
+            </mat-footer-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let student; columns: displayedColumns;"></mat-row>
+          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':allStudents?.data != null}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(allStudents?.data == null && allStudents?.data.length == 0)}"></mat-footer-row>
+        </mat-table>
+        <mat-paginator #paginator
+                       [length]="allStudents?.data?.length"
+                       [pageIndex]="0"
+                       [pageSize]="25"
+                       [pageSizeOptions]="[25, 50, 100, 250]"
+                       showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  </div>
+ 

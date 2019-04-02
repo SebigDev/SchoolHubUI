@@ -1,0 +1,72 @@
+
+<div class="search_field">
+  <button mat-raised-button color="accent" (click)="onCreateClass()">
+    <mat-icon matTooltip="Add New Class">add</mat-icon>
+    <mat-icon>school</mat-icon>
+  </button>
+  <mat-form-field class="search_form-field" color="accent" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search Class" autocomplete="off" (keyup)="applyFilter()" />
+  </mat-form-field>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="mat-elevation-z8 tableUser">
+  <mat-table #table [dataSource]="allClasses" matSort aria-label="Class">
+
+
+    <ng-container matColumnDef="classCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Class Code</mat-header-cell>
+      <mat-cell class="matEmail" *matCellDef="let class">{{class.classCode}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Class Name</mat-header-cell>
+      <mat-cell class="matEmail" *matCellDef="let class">{{class.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="createdOn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</mat-header-cell>
+      <mat-cell *matCellDef="let class">{{class.createdOn | date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let class">
+        <button mat-icon-button 
+                matTooltip="View and Edit Class"
+                matTooltipClass="addTip"
+                class="tip">
+          <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-icon-button 
+                matTooltip="Delete Class"
+                matTooltipClass="addTip">
+          <mat-icon color="warn">delete_outline</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="nodata">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No Available Data
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let class; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':allClasses?.data != null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(allClasses?.data == null && allClasses?.data?.length == 0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator #paginator
+                 [length]="allClasses?.data?.length"
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[25, 50, 100, 250]"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

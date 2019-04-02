@@ -1,0 +1,60 @@
+<mat-toolbar color="accent">Add Student</mat-toolbar>
+<form novalidate #addStaff="ngForm" (ngSubmit)="saveStaff()" fxLayout="column">
+  <mat-progress-bar mode="indeterminate" color="accent"  *ngIf="showSpinner"></mat-progress-bar>
+
+  <mat-form-field color="accent">
+    <mat-label>First Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.firstname"
+           name="firstname"
+           required />
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <mat-label>Middle Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.middlename"
+           name="middlename"
+           required />
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <mat-label>Last Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.lastname"
+           name="lastname"
+           required />
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+  </mat-form-field>
+
+  <section class="example-section">
+    <label class="example-margin">Gender:</label>
+    <mat-radio-group [(ngModel)]="model.gender" name="gender">
+      <mat-radio-button class="example-margin" value="1">Male</mat-radio-button>
+      <mat-radio-button class="example-margin" value="2">Female</mat-radio-button>
+    </mat-radio-group>
+  </section>
+
+
+  <mat-form-field color="accent">
+    <input matInput [matDatepicker]="pickerDB" [(ngModel)]="model.dateOfBirth" name="dateOfBirth" placeholder="Date of Birth">
+    <mat-datepicker-toggle matSuffix [for]="pickerDB"></mat-datepicker-toggle>
+    <mat-datepicker #pickerDB></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <input matInput [matDatepicker]="pickerDE" [(ngModel)]="model.dateOfRegistration" name="dateOfRegistration" placeholder="Date of Registration">
+    <mat-datepicker-toggle matSuffix [for]="pickerDE"></mat-datepicker-toggle>
+    <mat-datepicker #pickerDE></mat-datepicker>
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" [disabled]="!addStaff.form.valid">Add Student</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,28 @@
+<mat-toolbar color="accent">Add Class</mat-toolbar>
+<form novalidate #addClass="ngForm" (ngSubmit)="saveClass()" fxLayout="column">
+  <mat-spinner style="display: inline-block" color="accent" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+ 
+  <mat-form-field color="accent">
+    <mat-label>Class Code</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.classCode"
+           name="classCode"
+           required />
+    <mat-icon matSuffix>school</mat-icon>
+  </mat-form-field>
+  <mat-form-field color="accent">
+    <mat-label>Class Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.name"
+           name="name"
+           required />
+    <mat-icon matSuffix>school</mat-icon>
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" [disabled]="!addClass.form.valid">Add Class</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

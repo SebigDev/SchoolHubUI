@@ -1,0 +1,22 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+mat-nav-list a:hover{
+  background-color:honeydew
+}
+.icon{
+  display:inline-block;
+  margin:6px;
+}
+.sidenav{
+  background-color:lightgray;
+}

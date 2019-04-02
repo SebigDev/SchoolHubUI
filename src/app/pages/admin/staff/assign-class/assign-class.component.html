@@ -1,0 +1,18 @@
+<mat-toolbar color="accent">Assign Class</mat-toolbar>
+<form novalidate #assignStaff="ngForm" (ngSubmit)="saveStaffClassMap()" fxLayout="column">
+  <mat-spinner style="display: inline-block" color="accent" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+  <h3>Assign Class to <b style="color:lightcoral">{{staff.firstname}} {{staff.lastname}}</b> </h3>
+  <mat-form-field color="accent">
+    <mat-label>Select Class </mat-label>
+    <mat-select [(ngModel)]="model.id" name="id" required>
+      <mat-option *ngFor="let class of classes" [value]="class.id">
+        {{class.name}}-{{class.classCode}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" [disabled]="!assignStaff.form.valid">Update Staff</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

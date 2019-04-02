@@ -1,0 +1,28 @@
+<mat-toolbar color="accent">Add Subject</mat-toolbar>
+<form novalidate #addSubject="ngForm" (ngSubmit)="saveSubject()" fxLayout="column">
+  <mat-spinner style="display: inline-block" color="accent" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+
+  <mat-form-field color="accent">
+    <mat-label>Subject Code</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.subjectCode"
+           name="subjectCode"
+           required />
+    <mat-icon matSuffix>book</mat-icon>
+  </mat-form-field>
+  <mat-form-field color="accent">
+    <mat-label>Subject Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="model.subjectName"
+           name="subjectName"
+           required />
+    <mat-icon matSuffix>book</mat-icon>
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" [disabled]="!addSubject.form.valid">Add Subject</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

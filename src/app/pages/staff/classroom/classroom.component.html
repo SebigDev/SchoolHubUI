@@ -1,0 +1,18 @@
+<div class="col-sm-6 portlet">
+  <section class="panel panel-success portlet-item">
+    <header class="panel-heading"> Students in <b>{{classAssigned?.name}}</b> </header>
+    <ul class="list-group alt">
+      <li class="list-group-item" *ngFor="let student of students">
+        <div class="media">
+        <span class="pull-left thumb-sm"><img src="assets/images/avatar.jpg" alt="John said" class="img-circle"></span>
+        <div class="pull-right text-success m-t-sm"> <i class="fa fa-circle"></i> {{student.gender}}</div>
+        <div class="media-body"> <div>
+        <a (click)="navigateToStudentDetail(student.id)">{{student.firstname}} {{student.lastname}}</a>
+          </div>
+        <small class="text-muted">{{student.age}} years</small> </div>
+          </div>
+      </li>
+      </ul>
+    </section>
+</div>
+

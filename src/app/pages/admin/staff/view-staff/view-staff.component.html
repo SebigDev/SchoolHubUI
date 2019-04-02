@@ -1,0 +1,39 @@
+<mat-toolbar color="accent">Staff Detail</mat-toolbar>
+<form novalidate #viewStaff="ngForm" (ngSubmit)="updateStaff()" fxLayout="column">
+  <mat-spinner style="display: inline-block" color="accent" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+ 
+  <mat-form-field color="accent">
+    <mat-label>First Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="staff.firstname"
+           name="firstname"
+           required />
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <mat-label>Middle Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="staff.middlename"
+           name="middlename"
+           required />
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <mat-label>Last Name</mat-label>
+    <input type="text"
+           matInput
+           [(ngModel)]="staff.lastname"
+           name="lastname"
+           required />
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button type="submit" mat-raised-button color="accent" [disabled]="!viewStaff.form.valid">Update Staff</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

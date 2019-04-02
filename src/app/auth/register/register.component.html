@@ -1,0 +1,54 @@
+
+ <mat-card>
+  <mat-toolbar color="accent">Register</mat-toolbar>
+   <mat-card-content>
+     <form novalidate #registerForm="ngForm" (ngSubmit)="UserRegister()" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+       <mat-spinner style="display: block" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+       <mat-form-field>
+         <mat-label>Username</mat-label>
+         <input type="text"
+                matInput
+                [(ngModel)]="model.username"
+                name="username"
+                placeholder="Username"
+                required />
+         <mat-icon matSuffix>account_circle</mat-icon>
+       </mat-form-field>
+
+       <mat-form-field>
+         <mat-label>Email Address</mat-label>
+         <input type="email"
+                matInput
+                [(ngModel)]="model.emailAddress"
+                name="emailAddress"
+                placeholder="email address"
+                email
+                required />
+         <mat-error>Email Address is invalid</mat-error>
+         <mat-icon matSuffix>mail</mat-icon>
+       </mat-form-field>
+
+       <mat-form-field>
+         <mat-label>User Type</mat-label>
+         <mat-select [(ngModel)]="model.userType" name="userType" required>
+           <mat-option [ngValue]="undefined">Select User Type</mat-option>
+           <mat-option [ngValue]="1">Admin</mat-option>
+           <mat-option [ngValue]="2">Staff</mat-option>
+           <mat-option [ngValue]="3">Student</mat-option>
+         </mat-select>
+         <mat-error>One User Type must be selected</mat-error>
+       </mat-form-field>
+
+       <mat-checkbox color="primary"> Agree the <a href="#">terms and policy</a></mat-checkbox>
+       <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.form.valid">Sign up</button>
+       <div class="dashed">
+         <p class="text-muted text-center"><small>Already have an account?</small></p>
+         <a (click)="navigateToLogin()" mat-raised-button color="accent">Login</a>
+       </div>
+      
+     </form>
+      
+   </mat-card-content>
+ </mat-card>
+  
+   

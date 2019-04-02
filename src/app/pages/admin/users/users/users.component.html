@@ -1,0 +1,65 @@
+
+<div class="search_field">
+  <mat-form-field class="search_form-field" color="accent"  floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search Users" autocomplete="off" (keyup)="applyFilter()" />
+  </mat-form-field>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="mat-elevation-z8 tableUser">
+  <mat-table #table [dataSource]="allUsers" matSort aria-label="Users">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="emailAddress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email Address</mat-header-cell>
+      <mat-cell class="matEmail" *matCellDef="let user">{{user.emailAddress}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.username}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>User Type</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{returnUserType(user.userType)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isUpdated">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Updated</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.isUpdated}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button><mat-icon color="warn">delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="nodata">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No Available Data
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let user; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':allUsers?.data != null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(allUsers?.data == null && allUsers?.data?.length == 0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator #paginator
+                 [length]="allUsers?.data?.length" 
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[25, 50, 100, 250]"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

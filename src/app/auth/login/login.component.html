@@ -1,0 +1,44 @@
+
+<mat-card>
+  <mat-toolbar color="accent">Login</mat-toolbar>
+
+    <mat-card-content>
+      <form #loginForm="ngForm" (ngSubmit)="UserLogin()" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+
+        <mat-spinner class="loading" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+        <mat-form-field color="accent">
+          <mat-label>Email Address</mat-label>
+          <input type="email"
+                 [(ngModel)]="model.emailAddress"
+                 name="emailAddress"
+                 matInput
+                 placeholder="Placeholder"
+                 email
+                 required>
+          <mat-icon matSuffix>mail</mat-icon>
+          <mat-error>Email Address is invalid</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent" hintLabel="Should be atleast 6 characters">
+          <mat-label>Password</mat-label>
+          <input type="password"
+                 [(ngModel)]="model.password"
+                 name="password"
+                 matInput
+                 placeholder="Placeholder"
+                 minlength="6"
+                 required>
+          <mat-error>Should be atleast 6 characters</mat-error>
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+
+        <button type="submit" [disabled]="!loginForm.form.valid" mat-raised-button color="primary">Login</button>
+        <div class="dashed">
+          <p class="text-muted text-center"><small>Don't have an account?</small></p>
+          <a (click)="navigateToRegister()" mat-raised-button color="accent">Sign Up</a>
+        </div>
+      </form>
+    </mat-card-content>
+
+</mat-card>
+
+

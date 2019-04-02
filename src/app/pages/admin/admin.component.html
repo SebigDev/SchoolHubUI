@@ -1,0 +1,66 @@
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer
+               class="sidenav"
+               fixedInViewport="true"
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="accent">SchoolHub</mat-toolbar>
+    <mat-nav-list class="sidenav">
+      
+      <a mat-list-item (click)="navigateToUsersList()">
+        <mat-icon class="icon">people</mat-icon>
+        <span>
+          Users
+        </span>
+      </a>
+      <a mat-list-item (click)="navigateToStaffList()">
+        <mat-icon class="icon">people_outline</mat-icon>
+        <span>
+          Staffs
+        </span>
+      </a>
+      <a mat-list-item (click)="navigateToStudent()">
+        <mat-icon class="icon">supervised_user_circle</mat-icon>
+        <span>
+          Students
+        </span>
+      </a>
+      <a mat-list-item (click)="navigateToClass()">
+        <mat-icon class="icon">school</mat-icon>
+        <span>
+          Classes
+        </span>
+      </a>
+      <a mat-list-item (click)="navigateToSubject()">
+        <mat-icon class="icon">book</mat-icon>
+        <span>
+          Subjects
+        </span>
+      </a>
+      <a mat-list-item href="#">
+        Link 2
+      </a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <button type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()"
+              *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <mat-icon style="padding:6px">dashboard</mat-icon>
+      <span>Admin Dashboard</span>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
