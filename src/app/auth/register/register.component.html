@@ -30,11 +30,9 @@
 
        <mat-form-field>
          <mat-label>User Type</mat-label>
-         <mat-select [(ngModel)]="model.userType" name="userType" required>
-           <mat-option [ngValue]="undefined">Select User Type</mat-option>
-           <mat-option [ngValue]="1">Admin</mat-option>
-           <mat-option [ngValue]="2">Staff</mat-option>
-           <mat-option [ngValue]="3">Student</mat-option>
+         <mat-select [(ngModel)]="model.id" name="userType" required>
+           <mat-option [value]="undefined">Select User Type</mat-option>
+           <mat-option [value]="type.id" *ngFor="let type of userTypes">{{type.userType}}</mat-option>
          </mat-select>
          <mat-error>One User Type must be selected</mat-error>
        </mat-form-field>

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CreateUserDto, UsersClient, AuthenticationClient } from 'src/ClientServices/SchoolHubClientServices';
+import { CreateUserDto, UsersClient, AuthenticationClient, UserTypeEnum } from 'src/ClientServices/SchoolHubClientServices';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
@@ -12,6 +12,11 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   createdUserId: number;
   showSpinner: boolean = false;
+  userTypes : any[] = [
+    {id: 1, userType: 'Admin'},
+    {id: 2, userType: 'Staff'},
+    {id: 3, userType: 'Student'}
+  ]
 
   constructor(private _router: Router,
     private _userClientService: UsersClient,
@@ -20,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.model = {};
+    this.retriveUserTypes();
     this.checkAuth();
   }
   UserRegister(): void {
@@ -43,6 +49,9 @@ export class RegisterComponent implements OnInit {
       })
   }
 
+  public retriveUserTypes(): void{
+    this.userTypes;
+  }
   
   showLoad(position: any = "top-center", timeOut: number = 5000, animate: any = "fade"): void {
     this._toastr.infoToastr("Please wait...", "Registering User",
