@@ -44,11 +44,11 @@ export class AddSubjectComponent implements OnInit {
         this.classId = response;
         this.retrieveAllClasses();
         this.onClose()
-        this._toastr.successToastr(`${nSubj.subjectName} Created Successfully`, "Class Creation", { animate: 'fade' });
+        this._toastr.successToastr(`${nSubj.subjectName} Created Successfully`, "Subject Creation", { animate: 'fade' });
         this.showSpinner = false;
-      }, (_error) => {
+      }, (_error: {}) => {
         this.showSpinner = false;
-        this._toastr.errorToastr("Subject Creation Failed!", "Class Creation", { animate: 'fade' });
+        this._toastr.errorToastr("Subject Creation Failed!", "Subject Creation", { animate: 'fade' });
       })
 
   }

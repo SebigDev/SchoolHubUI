@@ -4,6 +4,7 @@
   <mat-form-field color="accent">
     <mat-label>Select Class</mat-label>
     <mat-select [(ngModel)]="model.id" name="class" class="form-control"  (selectionChange)="fetchSubjectForClass(model.id)" required>
+    <mat-option [value]="allClasses[0].data.id"></mat-option>
       <mat-option *ngFor="let class of allClasses" [value]="class.id">
         {{class?.name}}
       </mat-option>

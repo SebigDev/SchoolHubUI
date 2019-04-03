@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         this._toastr.successToastr(`${emailAddress}`, `Welcome !`, { animate: "fade" });
         this.roleCheck(emailAddress);
       },
-      (error) => {
+      (error: { message: any; }) => {
         this.showSpinner = false;
         console.log(error.message);
         this._toastr.errorToastr("Please Check your Credentials", "Login Failed!", { animate: "fade"});

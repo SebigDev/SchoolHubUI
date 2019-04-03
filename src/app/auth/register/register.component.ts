@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CreateUserDto, UsersClient, AuthenticationClient, UserTypeEnum } from 'src/ClientServices/SchoolHubClientServices';
+import { CreateUserDto, UsersClient} from 'src/ClientServices/SchoolHubClientServices';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
