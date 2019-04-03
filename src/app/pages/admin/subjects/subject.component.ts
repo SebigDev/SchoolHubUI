@@ -1,15 +1,16 @@
-import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
+
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClassesClient, ClassDto, SubjectsClient, ClassSubjectResponse } from 'src/ClientServices/SchoolHubClientServices';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatTabChangeEvent } from '@angular/material';
 import { AddSubjectComponent } from './add-subjects/add-subject.component';
+import { ClassSubjectResponse, ClassDto, ClassesClient, SubjectsClient } from '../../../../ClientServices/SchoolHubClientServices';
 
 @Component({
   selector: 'admin',
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.css'],
 })
-export class SubjectComponent implements OnInit {
+export class SubjectComponent implements OnInit , AfterViewInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -33,11 +34,20 @@ export class SubjectComponent implements OnInit {
     this.retrieveClasses();
   }
 
+  ngAfterViewInit() { 
+    this.fetchSubjectForClass(this.classId);
+  }
+
   retrieveClasses(): void {
     this._classServices.retrieveAllClasses()
       .subscribe((response: ClassDto[]) => {
         this.allClasses = response;
-      })
+      });
+  }
+
+  indexCheck(matTab: MatTabChangeEvent) {
+    this.classId = this.allClasses[matTab.index].id;
+    this.fetchSubjectForClass(this.classId);
   }
 
   fetchSubjectForClass(id: number): void {

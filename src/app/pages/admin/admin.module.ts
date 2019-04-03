@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule } from './admin.routing.module';
 import { StaffListComponent } from './staff/staff-list.component';
 import { UsersComponent } from './users/users/users.component';
@@ -10,7 +9,6 @@ import { ClassComponent } from './classes/class.component';
 import { FormsModule } from '@angular/forms';
 import { ClassDetailComponent } from './classes/class-detail/class-detail.component';
 import { StaffDetailComponent } from './staff/staff-detail/staff-detail.component';
-import { MaterialModule } from 'src/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TableComponent } from '../table/table.component';
@@ -26,6 +24,8 @@ import { AddStudentComponent } from './student/add-student/add-student.component
 import { ViewStudentComponent } from './student/view-student/view-student.component';
 import { DeleteStudentComponent } from './student/delete-student/delete-student.component';
 import { StudentDetailComponent } from './student/student-detail/student-detail.component';
+import { SharedModule } from '../../shared/shared.module';
+import { MaterialModule } from '../../../material/material.module';
 
 
 

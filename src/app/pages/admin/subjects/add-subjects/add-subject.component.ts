@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
-import {  ClassesClient, SubjectsClient, CreateSubjectDto } from 'src/ClientServices/SchoolHubClientServices';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { ClassesClient, SubjectsClient, CreateSubjectDto }
+ from '../../../../../ClientServices/SchoolHubClientServices';
 
 @Component({
   selector: 'add-subject',

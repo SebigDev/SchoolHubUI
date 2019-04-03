@@ -1,17 +1,5 @@
 
-<div class="select">
-  <h3 style="color:darkslategrey;">Select a Class to Display Subjects*</h3>
-  <mat-form-field color="accent">
-    <mat-label>Select Class</mat-label>
-    <mat-select [(ngModel)]="model.id" name="class" class="form-control"  (selectionChange)="fetchSubjectForClass(model.id)" required>
-    <mat-option [value]="allClasses[0].data.id"></mat-option>
-      <mat-option *ngFor="let class of allClasses" [value]="class.id">
-        {{class?.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-  <div class="search_field" *ngIf="classSelected">
+  <div class="search_field">
     <button mat-raised-button color="accent" (click)="onCreateSubject()">
       <mat-icon matTooltip="Add New Subject">add</mat-icon>
       <mat-icon>book</mat-icon>
@@ -23,68 +11,68 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <div class="mat-elevation-z8 tableUser">
-    <mat-table #table [dataSource]="subjects" matSort aria-label="Class">
+  <div class="search_field">
+      <mat-tab-group color="accent"  (selectedTabChange)="indexCheck($event)">
+        <mat-tab *ngFor="let mClass of allClasses; let index=index" [label]="mClass.classCode">
+          <div class="mat-elevation-z8 tableUser">
+            <mat-table #table [dataSource]="subjects" matSort aria-label="Class">
 
 
-      <ng-container matColumnDef="subjectCode">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Code</mat-header-cell>
-        <mat-cell *matCellDef="let subject">{{subject.subjectCode}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="subjectName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name</mat-header-cell>
-        <mat-cell *matCellDef="let subject">{{subject.subjectName}}</mat-cell>
-      </ng-container>
+              <ng-container matColumnDef="subjectCode">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Code</mat-header-cell>
+                <mat-cell *matCellDef="let subject">{{subject.subjectCode}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="subjectName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name</mat-header-cell>
+                <mat-cell *matCellDef="let subject">{{subject.subjectName}}</mat-cell>
+              </ng-container>
 
-      <ng-container matColumnDef="createdOn">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</mat-header-cell>
-        <mat-cell *matCellDef="let subject">{{subject.createdOn | date}}</mat-cell>
-      </ng-container>
+              <ng-container matColumnDef="createdOn">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</mat-header-cell>
+                <mat-cell *matCellDef="let subject">{{subject.createdOn | date}}</mat-cell>
+              </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-        <mat-cell *matCellDef="let subject">
-          <button mat-icon-button
-                  matTooltip="View and Edit Subject"
-                  matTooltipClass="addTip"
-                  class="tip">
-            <mat-icon>launch</mat-icon>
-          </button>
-          <button mat-icon-button
-                  matTooltip="Delete Subject"
-                  matTooltipClass="addTip">
-            <mat-icon color="warn">delete_outline</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                <mat-cell *matCellDef="let subject">
+                  <button mat-icon-button
+                          matTooltip="View and Edit Subject"
+                          matTooltipClass="addTip"
+                          class="tip">
+                    <mat-icon>launch</mat-icon>
+                  </button>
+                  <button mat-icon-button
+                          matTooltip="Delete Subject"
+                          matTooltipClass="addTip">
+                    <mat-icon color="warn">delete_outline</mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
 
-      <ng-container matColumnDef="loading">
-        <mat-footer-cell *matFooterCellDef colspan="6">
-          <mat-spinner [diameter]="50" color="accent"></mat-spinner>
-        </mat-footer-cell>
-      </ng-container>
-      <ng-container matColumnDef="nodata">
-        <mat-footer-cell *matFooterCellDef colspan="6">
-          No Available Data
-        </mat-footer-cell>
-      </ng-container>
-      <ng-container matColumnDef="load">
-        <mat-footer-cell *matFooterCellDef colspan="6">
-          Select a Class to display Subjects
-        </mat-footer-cell>
-      </ng-container>
+              <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                  <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+                </mat-footer-cell>
+              </ng-container>
+              <ng-container matColumnDef="nodata">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                  No Available Data
+                </mat-footer-cell>
+              </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let subject; columns: displayedColumns;"></mat-row>
-      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':subjects?.data != null}"></mat-footer-row>
-      <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(subjects?.data == null && subjects?.data?.length == 0)}"></mat-footer-row>
-      <mat-footer-row *matFooterRowDef="['load']" [ngClass]="{'hide':(subjects?.data != null)}"></mat-footer-row>
-    </mat-table>
-    <mat-paginator #paginator
-                   [length]="subjects?.data?.length"
-                   [pageIndex]="0"
-                   [pageSize]="25"
-                   [pageSizeOptions]="[25, 50, 100, 250]"
-                   showFirstLastButtons>
-    </mat-paginator>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let subject; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':subjects?.data != null}"></mat-footer-row>
+              <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(subjects?.data == null && subjects?.data?.length == 0)}"></mat-footer-row>
+            </mat-table>
+            <mat-paginator #paginator
+                          [length]="subjects?.data?.length"
+                          [pageIndex]="0"
+                          [pageSize]="25"
+                          [pageSizeOptions]="[25, 50, 100, 250]"
+                          showFirstLastButtons>
+            </mat-paginator>
+          </div>
+      </mat-tab>
+      </mat-tab-group>
   </div>

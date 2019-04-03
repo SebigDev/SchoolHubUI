@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource, MatTabChangeEvent } from '@angular/material';
 import { Router } from '@angular/router';
-import { StudentsClient, ClassesClient, ClassDto, StudentClassResponse } from 'src/ClientServices/SchoolHubClientServices';
 import { AddStudentComponent } from './add-student/add-student.component';
+import { ClassDto, StudentsClient, ClassesClient, StudentClassResponse } from '../../../../ClientServices/SchoolHubClientServices';
 
 @Component({
   selector: 'app-student',
@@ -83,7 +83,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
   }
 
   viewStudentDetail(id : number) {
-    this.router.navigate(['admin/students-settings/student-detail', id])
+    this.router.navigate([`admin/students-settings/${id}/student-detail`])
   }
 
 }
