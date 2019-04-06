@@ -58,14 +58,22 @@
                 matTooltip="View and Edit Staff"
                 matTooltipClass="addTip"
                 class="tip">
-          <mat-icon>launch</mat-icon>
-        </button>
-        <button mat-icon-button
-                matTooltip="Delete Staff"
-                matTooltipClass="addTip">
-          <mat-icon color="warn">delete_outline</mat-icon>
-        </button>
-      </mat-cell>
+          <mat-icon>border_color</mat-icon>
+          </button>
+
+          <button mat-icon-button (click)="viewStaffDetail(staff.id)"
+                  matTooltip="View Staff Details"
+                  matTooltipClass="addTip"
+                  class="tip">
+            <mat-icon>launch_outline</mat-icon>
+
+          </button>
+          <button mat-icon-button
+                  matTooltip="Delete Staff"
+                  matTooltipClass="addTip">
+            <mat-icon color="warn">delete_outline</mat-icon>
+          </button>
+</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="loading">

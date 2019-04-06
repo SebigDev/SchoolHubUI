@@ -14,6 +14,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class ViewStaffComponent implements OnInit {
   @ViewChild("FileInput") FileInput: ElementRef;
 
+
   updateStaffDto: any = {};
   showSpinner: boolean = false;
 
@@ -24,7 +25,6 @@ export class ViewStaffComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-
   }
 
   updateStaff(): void {
@@ -42,7 +42,6 @@ export class ViewStaffComponent implements OnInit {
         this._toastr.successToastr(`Staff Update was successfully`, "Staff Update", {animate: 'fade'})
       })
   }
-
 
    photoUpload(staffId: any) {
     let nativeElement: HTMLInputElement = this.FileInput.nativeElement;

@@ -3027,6 +3027,7 @@ export class UserLoginResponse implements IUserLoginResponse {
     success!: boolean;
     token?: string | undefined;
     userId!: number;
+    expiryDate!: Date;
 
     constructor(data?: IUserLoginResponse) {
         if (data) {
@@ -3042,6 +3043,7 @@ export class UserLoginResponse implements IUserLoginResponse {
             this.success = data["success"];
             this.token = data["token"];
             this.userId = data["userId"];
+            this.expiryDate = data["expiryDate"] ? new Date(data["expiryDate"].toString()) : <any>undefined;
         }
     }
 
@@ -3057,6 +3059,7 @@ export class UserLoginResponse implements IUserLoginResponse {
         data["success"] = this.success;
         data["token"] = this.token;
         data["userId"] = this.userId;
+        data["expiryDate"] = this.expiryDate ? this.expiryDate.toISOString() : <any>undefined;
         return data; 
     }
 }
@@ -3065,6 +3068,7 @@ export interface IUserLoginResponse {
     success: boolean;
     token?: string | undefined;
     userId: number;
+    expiryDate: Date;
 }
 
 export class UserDto implements IUserDto {

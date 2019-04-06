@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.model = {};
-    this.checkAuth();
   }
 
   UserLogin(): void {
@@ -45,8 +44,9 @@ export class LoginComponent implements OnInit {
       })
   }
 
- public roleCheck(email: string): void{
-   this._userClientService.retrieveUserByEmail(email).subscribe((response:UserDto)=>{
+ public roleCheck(email: string): void {
+   this._userClientService.retrieveUserByEmail(email).subscribe((response: UserDto) => {
+
      this.logUser = response;
      //check if user password is changed;
      if(response.isEmailConfirmed === false){
@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
      else if(response.isAdmin === false &&  response.isUpdated == false){
        this.navigateToStaffProfileUpdate(response.id);
      }
+
    })
  }
 
@@ -92,11 +93,7 @@ export class LoginComponent implements OnInit {
   navigateToHome(): void {
     this._router.navigate(['/'])
   }
-  checkAuth() {
-    if (this.isLoggedIn()) {
-      this.navigateToHome();
-    }
-  }
+
 
   isLoggedIn() {
     const token = localStorage.getItem("token");

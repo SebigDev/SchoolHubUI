@@ -46,6 +46,7 @@ export class AddStaffComponent implements OnInit {
         this.staffId = response;
         this.photoUpload(this.staffId);
         this.showSpinner = false;
+        this.onClose();
         this._toastr.successToastr("Staff Created Successfully!", "Staff Creation", { animate: 'fade' });
       }, () => {
         this.showSpinner = false;
@@ -57,6 +58,7 @@ export class AddStaffComponent implements OnInit {
     let nativeElement: HTMLInputElement = this.FileInput.nativeElement;
     this._uploadService.photoUpload(staffId, nativeElement.files[0])
       .subscribe((response: string) => {
+        response;
       })
   }
 

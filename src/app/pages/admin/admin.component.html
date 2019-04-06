@@ -56,6 +56,19 @@
       </button>
       <mat-icon style="padding:6px">dashboard</mat-icon>
       <span>Admin Dashboard</span>
+
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" fxHide.xs>
+        <ul fxLayout="rows" class="nav_items" fxLayoutGap="10px">
+          <li><a (click)="navigateToHome()">Home</a></li>
+          <li>
+            <a (click)="navigateToLogout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <mat-icon class="icon">user</mat-icon>
+      <span>
+        Welcome <i style="font-size:small">{{userDto?.emailAddress}}</i>
+      </span>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

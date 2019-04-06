@@ -7,6 +7,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/m
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { ViewStaffComponent } from './view-staff/view-staff.component';
 import { AssignClassComponent } from './assign-class/assign-class.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'staff-list',
@@ -108,5 +109,8 @@ export class StaffListComponent implements OnInit {
     this._router.navigate([`admin/staffSettings/${id}/staff-detail`])
   }
 
+  viewStaffDetail(id: any): void {
+    this._router.navigate([`admin/staff-settings/${id}/staff-detail`])
+  }
 
 }

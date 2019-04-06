@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     user.emailAddress = this.model.emailAddress;
     user.password = Math.random().toString(36).slice(-12);
     user.isEmailConfirmed = false;
-    user.userType = this.model.userType;
+    user.userType = this.model.id;
     this._userClientService.register(user)
       .subscribe((response: number) => {
         this.createdUserId = response;
